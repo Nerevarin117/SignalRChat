@@ -1,0 +1,49 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+    @Html.AntiForgeryToken()
+
+    <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+            <a href="#" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">Hello  <b>@User.Identity.GetUserName()</b>  !&ensp;<span class="glyphicon glyphicon-user"></span><span class="caret"></span></a>
+            <ul class="dropdown-menu" aria-labelledby="dropQuote">
+                <li>
+                    <a href="/Quote/MyFeed" title="MyFeed"><span class="glyphicon glyphicon-heart"></span>&ensp;My Feed</a>
+                </li>
+                <li>
+                    <a href="/Quote/MyQuotes" title="MyQuotes"><span class="glyphicon glyphicon-list"></span>&ensp;My Wall</a>
+                </li>
+                <li>                    
+                    <a href="/Quote/Calendar" title="Calendar"><span class="glyphicon glyphicon-calendar"></span>&ensp;My Calendar</a>
+                </li>
+                <li role="separator" class="divider"></li>
+                <li>
+                    <a href="/Users/Profile" title="MyFeed"><span class="glyphicon glyphicon-user"></span>&ensp;My Profile</a>
+                </li>
+                <li>
+                    <a href="/Users/MailBox" title="Calendar"><span class="glyphicon glyphicon-envelope"></span>&ensp;Message(s)</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="/Admin">Administration&ensp;<span class="glyphicon glyphicon-cog"></span></a>
+        </li>          
+        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log Out&ensp;<span class="glyphicon glyphicon-log-out"></span></a></li>
+    </ul>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li>
+            <a href="#"></a>
+        </li>   
+        <li>@Html.ActionLink("Sign In", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
+}
+<script>
+    $('.dropdown-toggle').dropdown()
+</script>

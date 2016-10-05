@@ -8,13 +8,13 @@
 </div>
 <div class="row">
     <div class="col-lg-9">
-        <div class="panel panel-primary">
-            <div class="panel-heading text-center">
+        <div class="panel panel-chat">
+            <div class="panel-heading text-center" style="color:white">
                 <h3 class="panel-title">Chat Box</h3>
             </div>
-            <div class="panel-body" style="background-color: #428bca;max-height: 100% ">
-                <div class="row" style="background-color:#428bca">
-                    <div class="col-lg-3" style="background-color: #428bca;">
+            <div class="panel-body" style="background-color: black;max-height: 100% ">
+                <div class="row" style="background-color:black">
+                    <div class="col-lg-3" style="background-color: black;">
                         <div style="background-color: white;height: 100%;max-height:700px;overflow-y:scroll;overflow-x:hidden">
                             <ul style="list-style-type: none;padding: 10px;background-color: white">
                                 <li>
@@ -27,7 +27,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col-lg-9" style="background-color: #428bca;">
+                    <div class="col-lg-9" style="background-color: black;">
                         <div style="background-color: white;height: 100%;max-height:700px;overflow-y:scroll">
                             <ul id="discussion" style="list-style-type: none;padding: 10px;background-color: white">
                                 <li>
@@ -40,7 +40,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row" style="background-color: #428bca;padding-top: 2%">
+                <div class="row" style="background-color: black;padding-top: 2%">
                     <div class="col-lg-3">
                     </div>
                     <div class="col-lg-9">
@@ -56,21 +56,74 @@
         </div>
     </div>
     <div class="col-lg-3">
-        <div class="panel panel-default">
-            <div class="panel-heading text-center">
-                <h3 class="panel-title">Command List</h3>
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+                <div class="panel-heading text-center" role="tab" id="headingTwo">
+                    <h3 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                            Commands
+                        </a>
+                    </h3>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
+                    <div class="panel-body">
+                        <ul>
+                            <li>
+                                <b>/w &lt;username&gt; &lt;message&gt; :</b> whisper a message to a specific user.
+                            </li>
+                            <li>
+                                <b>/nick &lt;username&gt; :</b> change your room username.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-            <div class="panel-body">
-                <ul style="list-style-type: none;padding: 10px;">
-                    <li>
-                        <b>/w &lt;username&gt; &lt;message&gt; :</b> whisper a message to a specific user.
-                    </li>
-                    <li>
-                        <b>/nick &lt;username&gt; :</b> change your room username.
-                    </li>
-                </ul>
+            <div class="panel panel-default">
+                <div class="panel-heading text-center" role="tab" id="headingOne">
+                    <h3 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Plugin(s)
+                        </a>
+                    </h3>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                    <div class="panel-body">
+                        <ul style="list-style-type: none;padding: 10px;">
+                            <li>
+                                Active Bots:
+                            </li>
+                            <li>
+                                <hr />
+                            </li>
+                            <li>
+                                some bot
+                            </li>
+                            <li>
+                                some bot
+                            </li>
+                        </ul>
+                        <ul style="list-style-type: none;padding: 10px;">
+                            <li>
+                                Active Plugins:
+                            </li>
+                            <li>
+                                <hr />
+                            </li>
+                            <li>
+                                some plugin
+                            </li>
+                            <li>
+                                some plugin
+                            </li>
+                            <li>
+                                some plugin
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
+       
     </div>
 </div>
 @section scripts {
