@@ -1,12 +1,77 @@
 ﻿@{
     ViewBag.Title = "Chat";
 }
-<h2>Chat</h2>
-<div class="container">
-    <input type="text" id="message" />
-    <input type="button" id="sendmessage" value="Send" />
-    <input type="hidden" id="displayname" />
-    <ul id="discussion"></ul>
+
+<div class="row">
+    <div class="panel">
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-9">
+        <div class="panel panel-primary">
+            <div class="panel-heading text-center">
+                <h3 class="panel-title">Chat Box</h3>
+            </div>
+            <div class="panel-body" style="background-color: #428bca;max-height: 100% ">
+                <div class="row" style="background-color:#428bca">
+                    <div class="col-lg-3" style="background-color: #428bca;">
+                        <div style="background-color: white;height: 100%;max-height:700px;overflow-y:scroll;overflow-x:hidden">
+                            <ul style="list-style-type: none;padding: 10px;background-color: white">
+                                <li>
+                                    In the Room :
+                                </li>
+                                <li>
+                                    <hr>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-9" style="background-color: #428bca;">
+                        <div style="background-color: white;height: 100%;max-height:700px;overflow-y:scroll">
+                            <ul id="discussion" style="list-style-type: none;padding: 10px;background-color: white">
+                                <li>
+                                    <i>Welcome In the Chat Room!</i>
+                                </li>
+                                <li>
+                                    <hr>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="background-color: #428bca;padding-top: 2%">
+                    <div class="col-lg-3">
+                    </div>
+                    <div class="col-lg-9">
+                        <div class="input-group">
+                            <input id="message" type="text" class="form-control" placeholder="New Message...">
+                            <span class="input-group-btn">
+                                <button id="sendmessage" class="btn btn-default" type="button">Send!</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="panel panel-default">
+            <div class="panel-heading text-center">
+                <h3 class="panel-title">Command List</h3>
+            </div>
+            <div class="panel-body">
+                <ul style="list-style-type: none;padding: 10px;">
+                    <li>
+                        <b>/w &lt;username&gt; &lt;message&gt; :</b> whisper a message to a specific user.
+                    </li>
+                    <li>
+                        <b>/nick &lt;username&gt; :</b> change your room username.
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
 @section scripts {
     <!--Script references. -->
@@ -18,6 +83,14 @@
     <!--SignalR script to update the chat page and send messages.-->
     <script>
         $(function () {
+
+            //Auto click Send
+            $("#message").keyup(function (event) {
+                if (event.keyCode == 13) {
+                    $("#sendmessage").click();
+                }
+            });
+
             // Reference the auto-generated proxy for the hub.
             var chat = $.connection.chatHub;
             // Create a function that the hub can call back to display messages.
