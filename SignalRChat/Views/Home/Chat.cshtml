@@ -27,7 +27,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col-lg-9" style="background-color: black;">
+                    <div class="col-lg-9" style="background-color: black;height:calc(75vh)">
                         <div style="background-color: white;height: 100%;max-height:700px;overflow-y:scroll">
                             <ul id="discussion" style="list-style-type: none;padding: 10px;background-color: white">
                                 <li>
@@ -76,6 +76,9 @@
                             </li>
                             <li>
                                 <b>/gif &lt;keywork(s) or sentence&gt; &lt; :</b> will try to browse online a gif related to what you provided.
+                            </li>
+                            <li>
+                                <b>/clear : </b> Clear the chat messages.
                             </li>
                         </ul>
                     </div>
@@ -129,6 +132,7 @@
        
     </div>
 </div>
+@Scripts.Render("~/bundles/chat")
 @section scripts {
     <!--Script references. -->
     <!--The jQuery library is required and is referenced by default in _Layout.cshtml. -->
@@ -168,6 +172,11 @@
             // Start the connection.
             $.connection.hub.start().done(function () {
                 $('#sendmessage').click(function () {
+                    // parse and execute client side commands if any
+                    if (executeCommands($('#message').val())) {
+                        $('#message').val('').focus();
+                        return;
+                    }
                     // Call the Send method on the hub.
                     chat.server.send($('#displayname').val(), $('#message').val());
                     // Clear text box and reset focus for next comment.

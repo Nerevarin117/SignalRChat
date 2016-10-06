@@ -45,3 +45,7 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+/SignalRChat/bin
+/SignalRChat/obj/Debug/SignalRChat.csprojResolveAssemblyReference.cache
+/SignalRChat/obj/Debug/SignalRChat.dll
+/SignalRChat/obj/Debug/SignalRChat.pdb

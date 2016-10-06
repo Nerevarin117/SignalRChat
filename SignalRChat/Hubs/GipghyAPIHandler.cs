@@ -29,7 +29,7 @@ namespace SignalRChat.Hubs
 
             try
             {
-                WebRequest webRequest = WebRequest.Create(BaseUrl + "gif/search?q=" + String.Join("+", keywords) + "&api_key=" + PublicKey);
+                WebRequest webRequest = WebRequest.Create(BaseUrl + "gifs/search?q=" + String.Join("+", keywords) + "&api_key=" + PublicKey);
                 webRequest.Method = "GET";
                 webRequest.Timeout = 1000;
                 webRequest.ContentType = "application/json";
