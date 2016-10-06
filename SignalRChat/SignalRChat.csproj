@@ -187,8 +187,12 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Hubs\ChatHub.cs" />
+    <Compile Include="Hubs\CommandParser.cs" />
+    <Compile Include="Hubs\GipghyAPIHandler.cs" />
+    <Compile Include="Hubs\StickerParser.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CountryModel.cs" />
+    <Compile Include="Models\GiphyModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

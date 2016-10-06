@@ -74,6 +74,9 @@
                             <li>
                                 <b>/nick &lt;username&gt; :</b> change your room username.
                             </li>
+                            <li>
+                                <b>/gif &lt;keywork(s) or sentence&gt; &lt; :</b> will try to browse online a gif related to what you provided.
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -149,8 +152,14 @@
             // Create a function that the hub can call back to display messages.
             chat.client.addNewMessageToPage = function (name, message) {
                 // Add the message to the page.
-                $('#discussion').append('<li><strong>' + htmlEncode(name)
-                    + '</strong>: ' + htmlEncode(message) + '</li>');
+                if (name == "NativeCommand") {
+                    $('#discussion').append('<li><strong>' + htmlEncode(name)
+                    + '</strong> : ' + message + '</li>');
+                } else {
+                    $('#discussion').append('<li><strong>' + htmlEncode(name)
+                    + '</strong> : ' + message + '</li>');
+                }
+                
             };
             // Get the user name and store it to prepend to messages.
             $('#displayname').val(prompt('Enter your name:', ''));
