@@ -49,3 +49,6 @@ Temporary Items
 /SignalRChat/obj/Debug/SignalRChat.csprojResolveAssemblyReference.cache
 /SignalRChat/obj/Debug/SignalRChat.dll
 /SignalRChat/obj/Debug/SignalRChat.pdb
+*.dll
+SignalRChat.v12.suo
+sRC-Database/sRC-Database.dbmdl
