@@ -170,6 +170,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Code\" />
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
@@ -181,6 +182,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\RobotController.cs" />
     <Compile Include="DAL\CountryDAL.cs" />
     <Compile Include="DAL\Database.cs" />
     <Compile Include="Global.asax.cs">
@@ -195,6 +197,9 @@
     <Compile Include="Models\GiphyModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\SimpleBotModel.cs" />
+    <Compile Include="Models\SimpleBotViewModel.cs" />
+    <Compile Include="Models\SocialModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -496,6 +501,9 @@
     <Content Include="Views\Shared\_LoginModal.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
+    <Content Include="Views\Robot\_CreateSimpleBot.cshtml" />
+    <Content Include="Views\Robot\_CreateAdvertiser.cshtml" />
+    <Content Include="Views\Shared\Helpers\BotHelpers.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -54,7 +54,7 @@ namespace SignalRChat.Hubs
             }
             catch (Exception e)
             {
-                return "<p>Error Executing Gif Feature<p>";
+                return "Error Executing Gif Feature";
             }
         }
 
@@ -93,7 +93,7 @@ namespace SignalRChat.Hubs
             }
             catch (Exception e)
             {
-                return "<p>Error Executing Sticker Feature <p>";
+                return "Error Executing Sticker Feature";
             }
         }
             
