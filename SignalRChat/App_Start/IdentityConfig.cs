@@ -10,6 +10,7 @@ using System.Diagnostics;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Configuration;
 
 namespace SignalRChat
 {
