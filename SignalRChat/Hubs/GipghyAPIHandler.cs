@@ -29,7 +29,7 @@ namespace SignalRChat.Hubs
 
             try
             {
-                WebRequest webRequest = WebRequest.Create(BaseUrl + "gifs/search?q=" + String.Join("+", keywords) + "&api_key=" + PublicKey);
+                WebRequest webRequest = WebRequest.Create(BaseUrl + "gifs/random?tag=" + String.Join("+", keywords) + "&api_key=" + PublicKey);
                 webRequest.Method = "GET";
                 webRequest.Timeout = 1000;
                 webRequest.ContentType = "application/json";
@@ -46,11 +46,9 @@ namespace SignalRChat.Hubs
 
                 response.Close();
 
-                var obj = (GiphyData)JsonConvert.DeserializeObject(jsonResponse, typeof(GiphyData));
+                var obj = (StickerData)JsonConvert.DeserializeObject(jsonResponse, typeof(StickerData));
 
-                var selectedUrls = obj.data.Where(s => s.source_tld.Contains("reddit")).Select(x => x.images.fixed_height_small.url).ToList();
-                var rnd = new Random();
-                return "<img title='Powered By Giphy' src='" + selectedUrls[rnd.Next(selectedUrls.Count)] + "' alt='Powered By Giphy'/>";
+                return "<img title='Powered By Giphy' src='" + obj.data.fixed_height_small_url + "' alt='Powered By Giphy'/>";
             }
             catch (Exception e)
             {
@@ -96,6 +94,40 @@ namespace SignalRChat.Hubs
                 return "Error Executing Sticker Feature";
             }
         }
-            
+
+        public static string FindGifListOnKeyword(string keyword)
+        {
+            Stream dataStream = null;
+            string jsonResponse = "KO";
+
+            try
+            {
+                WebRequest webRequest = WebRequest.Create(BaseUrl + "gifs/search?q=" + keyword + "&api_key=" + PublicKey);
+                webRequest.Method = "GET";
+                webRequest.Timeout = 1000;
+                webRequest.ContentType = "application/json";
+                var response = (HttpWebResponse)webRequest.GetResponse();
+                if (response.StatusCode == HttpStatusCode.OK)
+                    dataStream = response.GetResponseStream();
+                if (dataStream != null)
+                {
+                    var reader = new StreamReader(dataStream);
+                    jsonResponse = reader.ReadToEnd();
+                    reader.Close();
+                    dataStream.Close();
+                }
+
+                response.Close();
+
+                var obj = (GiphyData)JsonConvert.DeserializeObject(jsonResponse, typeof(GiphyData));
+                //TODO return list of selectable gifs to be sent or do it client side?
+                return "";
+            }
+            catch (Exception e)
+            {
+                return "<p>Error Executing Sticker Feature <p>";
+            }
+        }
+
     }
 }
