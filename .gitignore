@@ -51,3 +51,4 @@ Temporary Items
 /SignalRChat/obj/Debug/SignalRChat.pdb
 .vs/SignalRChat/v14/.suo
 SignalRChat/Web.config
+*.config
