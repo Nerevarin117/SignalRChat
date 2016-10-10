@@ -11,12 +11,18 @@ namespace SignalRChat
         public void Send(string name, string message)
         {
             // Call the addNewMessageToPage method to update clients.
-            if(message.IndexOf("/", System.StringComparison.Ordinal)==0)
-                CommandParser.ParseMessage(Clients,name,message);
+            if(message.IndexOf("/", System.StringComparison.Ordinal) == 0)
+            {
+                CommandParser.ParseMessage(Clients, name, message);
+            }
+            else
+            {
+                message = StickerParser.ParseStickers(message);
 
-            message = StickerParser.ParseStickers(message);
+                Clients.All.addNewMessageToPage(name, message);
+            }               
 
-            Clients.All.addNewMessageToPage(name, message);
+           
         }
     }
 }

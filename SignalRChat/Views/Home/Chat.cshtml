@@ -7,10 +7,12 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-lg-9">
+    <div id="chatPanel" class="col-lg-9">
         <div class="panel panel-chat">
             <div class="panel-heading text-center" style="color:white">
-                <h3 class="panel-title">Chat Box</h3>
+                <h3 class="panel-title">Chat Box</h3>  
+                <div class="btn" role="button" onclick="toggleFullScreen()" style="position:absolute;right: 15px;top: 10px;"><span id="screenIcon" class="glyphicon glyphicon-resize-full" ></span></div> 
+                             
             </div>
             <div class="panel-body" style="background-color: black;max-height: 100% ">
                 <div class="row" style="background-color:black">
@@ -47,7 +49,7 @@
                         <div class="input-group">
                             <input id="message" type="text" class="form-control" placeholder="New Message...">
                             <span class="input-group-btn">
-                                <button id="sendmessage" class="btn btn-default" type="button">Send!</button>
+                                <button id="sendmessage" class="btn btn-default" type="button">Send</button>
                             </span>
                         </div>
                     </div>
@@ -55,7 +57,7 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-3">
+    <div id="commandPanel" class="col-lg-3">
         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
             <div class="panel panel-default">
                 <div class="panel-heading text-center" role="tab" id="headingTwo">
@@ -81,11 +83,15 @@
                                 <b>/gifs &lt;keywork(s)&gt; :</b> will browse online several gifs and let you chose between them.
                             </li>
                             <li>
+                                <b>/meme "image-url" "caption-top" "caption-bottom" : </b> Will display the image and write your caption on top of it.
+                            </li>
+                            <li>
                                 <b>/clear : </b> Clear the chat messages.
                             </li>
                             <li>
                                 <b>!&lt;keywork(s)&gt;! : </b> will insert a sticker related to the keyword you provided.
                             </li>
+
                         </ul>
                     </div>
                 </div>
@@ -138,7 +144,14 @@
        
     </div>
 </div>
-@Scripts.Render("~/bundles/chat")
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <div id="modalContent" class="modal-content">
+ 
+        </div>
+    </div>
+</div>
+@Scripts.Render("~/bundles/chat");
 @section scripts {
     <!--Script references. -->
     <!--The jQuery library is required and is referenced by default in _Layout.cshtml. -->
@@ -162,13 +175,8 @@
             // Create a function that the hub can call back to display messages.
             chat.client.addNewMessageToPage = function (name, message) {
                 // Add the message to the page.
-                if (name == "NativeCommand") {
-                    $('#discussion').append('<li><strong>' + htmlEncode(name)
-                    + '</strong> : ' + message + '</li>');
-                } else {
-                    $('#discussion').append('<li><strong>' + htmlEncode(name)
-                    + '</strong> : ' + message + '</li>');
-                }
+                $('#discussion').append('<li><strong>' + htmlEncode(name)
+                + '</strong> : ' + message + '</li>');                
                 
             };
             // Get the user name and store it to prepend to messages.
@@ -190,10 +198,30 @@
                 });
             });
         });
+        
         // This optional function html-encodes messages for display in the page.
         function htmlEncode(value) {
             var encodedValue = $('<div />').text(value).html();
             return encodedValue;
         }
+        var fullscreen = false;
+        function toggleFullScreen() {
+            if(!fullscreen){
+                fullscreen = true;                
+                $("#commandPanel").hide();
+                $("#chatPanel").removeClass("col-lg-9");
+                $("#chatPanel").addClass("col-lg-12");
+                $("#screenIcon").removeClass("glyphicon-resize-full");
+                $("#screenIcon").addClass("glyphicon-resize-small");
+            } else {
+                fullscreen = false;
+                $("#chatPanel").removeClass("col-lg-12");
+                $("#chatPanel").addClass("col-lg-9");
+                $("#screenIcon").removeClass("glyphicon-resize-small");
+                $("#screenIcon").addClass("glyphicon-resize-full");
+                $("#commandPanel").show();
+            }
+        }
+
     </script>
 }

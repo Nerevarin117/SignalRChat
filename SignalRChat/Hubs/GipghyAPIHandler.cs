@@ -95,46 +95,12 @@ namespace SignalRChat.Hubs
             }
         }
 
-        public static string FindGifListOnKeyword(string keywords)
-        {
-            Stream dataStream = null;
-            string jsonResponse = "KO";
-
-            try
-            {
-                WebRequest webRequest = WebRequest.Create(BaseUrl + "gifs/search?q=" + keywords + "&api_key=" + PublicKey);
-                webRequest.Method = "GET";
-                webRequest.Timeout = 1000;
-                webRequest.ContentType = "application/json";
-                var response = (HttpWebResponse)webRequest.GetResponse();
-                if (response.StatusCode == HttpStatusCode.OK)
-                    dataStream = response.GetResponseStream();
-                if (dataStream != null)
-                {
-                    var reader = new StreamReader(dataStream);
-                    jsonResponse = reader.ReadToEnd();
-                    reader.Close();
-                    dataStream.Close();
-                }
-
-                response.Close();
-
-                var obj = (GiphyData)JsonConvert.DeserializeObject(jsonResponse, typeof(GiphyData));
-                //TODO return list of selectable gifs to be sent or do it client side?
-                return "";
-            }
-            catch (Exception e)
-            {
-                return "<p>Error Executing Sticker Feature <p>";
-            }
-        }
-
-        public static GiphyData GifListFilter(string keyword,int limit,int offset)
+        public static GiphyData GifListFilter(string keywords,int limit,int offset)
         {
             Stream dataStream = null;
             string jsonResponse = "KO";
            
-            WebRequest webRequest = WebRequest.Create(BaseUrl + "gifs/search?q=" + keyword + "&api_key=" + PublicKey+"&limit="+limit+"&offset="+offset);
+            WebRequest webRequest = WebRequest.Create(BaseUrl + "gifs/search?q=" + keywords + "&api_key=" + PublicKey+"&limit="+limit+"&offset="+offset);
             webRequest.Method = "GET";
             webRequest.Timeout = 1000;
             webRequest.ContentType = "application/json";
