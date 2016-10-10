@@ -11,6 +11,7 @@ using System.Diagnostics;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Configuration;
 
 namespace SignalRChat
 {
@@ -24,7 +25,7 @@ namespace SignalRChat
         // Use NuGet to install SendGrid (Basic C# client lib) 
         private async Task configSendGridasync(IdentityMessage message)
         {
-            var sg = new SendGridAPIClient(ConfigurationManager.AppSettings["SendGridKey"], "https://api.sendgrid.com");
+            var sg = new SendGridAPIClient(ConfigurationManager.AppSettings["SGAPIKey"], "https://api.sendgrid.com");
             Email from = new Email("confirm@signalRChat.com");
             string subject = message.Subject;
             Email to = new Email(message.Destination);

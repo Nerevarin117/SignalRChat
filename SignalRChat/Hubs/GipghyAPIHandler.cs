@@ -22,14 +22,14 @@ namespace SignalRChat.Hubs
         private const string PublicKey = "dc6zaTOxFJmzC";
         private const string BaseUrl = "http://api.giphy.com/v1/";
 
-        public static string FindGifOnKeyword(string[] keywords)
+        public static string FindGifOnKeyword(string keywords)
         {
             Stream dataStream = null;
             string jsonResponse = "KO";
 
             try
             {
-                WebRequest webRequest = WebRequest.Create(BaseUrl + "gifs/random?tag=" + String.Join("+", keywords) + "&api_key=" + PublicKey);
+                WebRequest webRequest = WebRequest.Create(BaseUrl + "gifs/random?tag=" + keywords + "&api_key=" + PublicKey);
                 webRequest.Method = "GET";
                 webRequest.Timeout = 1000;
                 webRequest.ContentType = "application/json";
@@ -95,14 +95,14 @@ namespace SignalRChat.Hubs
             }
         }
 
-        public static string FindGifListOnKeyword(string keyword)
+        public static string FindGifListOnKeyword(string keywords)
         {
             Stream dataStream = null;
             string jsonResponse = "KO";
 
             try
             {
-                WebRequest webRequest = WebRequest.Create(BaseUrl + "gifs/search?q=" + keyword + "&api_key=" + PublicKey);
+                WebRequest webRequest = WebRequest.Create(BaseUrl + "gifs/search?q=" + keywords + "&api_key=" + PublicKey);
                 webRequest.Method = "GET";
                 webRequest.Timeout = 1000;
                 webRequest.ContentType = "application/json";
@@ -127,6 +127,32 @@ namespace SignalRChat.Hubs
             {
                 return "<p>Error Executing Sticker Feature <p>";
             }
+        }
+
+        public static GiphyData GifListFilter(string keyword,int limit,int offset)
+        {
+            Stream dataStream = null;
+            string jsonResponse = "KO";
+           
+            WebRequest webRequest = WebRequest.Create(BaseUrl + "gifs/search?q=" + keyword + "&api_key=" + PublicKey+"&limit="+limit+"&offset="+offset);
+            webRequest.Method = "GET";
+            webRequest.Timeout = 1000;
+            webRequest.ContentType = "application/json";
+            var response = (HttpWebResponse)webRequest.GetResponse();
+            if (response.StatusCode == HttpStatusCode.OK)
+                dataStream = response.GetResponseStream();
+            if (dataStream != null)
+            {
+                var reader = new StreamReader(dataStream);
+                jsonResponse = reader.ReadToEnd();
+                reader.Close();
+                dataStream.Close();
+            }
+
+            response.Close();
+
+            return (GiphyData)JsonConvert.DeserializeObject(jsonResponse, typeof(GiphyData));
+        
         }
 
     }

@@ -172,6 +172,7 @@
   <ItemGroup>
     <Folder Include="App_Code\" />
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Command\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -180,6 +181,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\GifController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RobotController.cs" />
@@ -503,7 +505,7 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Robot\_CreateSimpleBot.cshtml" />
     <Content Include="Views\Robot\_CreateAdvertiser.cshtml" />
-    <Content Include="Views\Shared\Helpers\BotHelpers.cshtml" />
+    <Content Include="Views\Gif\_GifSelector.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
