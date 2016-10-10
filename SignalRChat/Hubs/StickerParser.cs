@@ -13,7 +13,7 @@ namespace SignalRChat.Hubs
         public static string ParseStickers(string input)
         {
 
-            return Regex.Replace(input, Pattern, GipghyAPIHandler.FindStickerOnKeyword);
+            return Regex.Replace(input, Pattern, GiphyAPIHandler.FindStickerOnKeyword);
 
         }
     }

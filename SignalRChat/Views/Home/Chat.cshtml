@@ -11,14 +11,13 @@
         <div class="panel panel-chat">
             <div class="panel-heading text-center" style="color:white">
                 <h3 class="panel-title">Chat Box</h3>  
-                <div class="btn" role="button" onclick="toggleFullScreen()" style="position:absolute;right: 15px;top: 10px;"><span id="screenIcon" class="glyphicon glyphicon-resize-full" ></span></div> 
-                             
+                <div class="btn" role="button" onclick="toggleFullScreen()" style="position:absolute;right: 15px;top: 10px;"><span id="screenIcon" class="glyphicon glyphicon-resize-full" ></span></div>                             
             </div>
-            <div class="panel-body" style="background-color: black;max-height: 100% ">
-                <div class="row" style="background-color:black">
-                    <div class="col-lg-3" style="background-color: black;">
-                        <div style="background-color: white;height: 100%;max-height:700px;overflow-y:scroll;overflow-x:hidden">
-                            <ul style="list-style-type: none;padding: 10px;background-color: white">
+            <div class="panel-body chat" style="max-height: 100%;">
+                <div class="row chat">
+                    <div class="col-lg-3 chat" >
+                        <div class="panel" style="background-color: white;height: 100%;max-height:700px;overflow-y:auto;overflow-x:hidden;">
+                            <ul style="list-style-type:none;padding: 10px;background-color: white;">
                                 <li>
                                     In the Room :
                                 </li>
@@ -29,8 +28,8 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col-lg-9" style="background-color: black;height:calc(75vh)">
-                        <div style="background-color: white;height: 100%;max-height:700px;overflow-y:scroll">
+                    <div class="col-lg-9 chat" style="height:calc(75vh);">
+                        <div class="panel" style="background-color: white;height: 100%;max-height:700px;overflow-y:auto">
                             <ul id="discussion" style="list-style-type: none;padding: 10px;background-color: white">
                                 <li>
                                     <i>Welcome In the Chat Room!</i>
@@ -42,7 +41,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row" style="background-color: black;padding-top: 2%">
+                <div class="row chat" style="padding-top: 2%">
                     <div class="col-lg-3">
                     </div>
                     <div class="col-lg-9">

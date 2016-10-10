@@ -1,14 +1,29 @@
-﻿body {
+﻿@font-face{
+    font-family : 'comic neue';
+    src: url('/fonts/ComicNeue_Bold.otf')
+}
+
+body {
     padding-top: 50px;
     padding-bottom: 20px;
     height: 100%;
-    background-image:url("Backgrounds/plate.jpg")
+    background-image:url("../../Content/Backgrounds/bck1.jpg");
+    font-family : 'comic neue';
 }
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+}
+
+.chat{
+    background-color: transparent;
+}
+
+.panel-chat{
+    background-color:rgba(63, 67, 130, 0.67);
+    border-color:black;
 }
 
 /* Set width on the form input elements since they're 100% wide by default 
@@ -41,11 +56,6 @@ input[type="checkbox"].input-validation-error {
 
 .validation-summary-valid {
     display: none;
-}
-
-.panel-chat{
-    background-color:black;
-    border-color:black;
 }
 
 .meme {

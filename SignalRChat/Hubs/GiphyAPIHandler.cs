@@ -17,7 +17,7 @@ namespace SignalRChat.Hubs
     /// Class to handle calls to giphy API to retreive random gifs
     /// Reference : https://github.com/Giphy/GiphyAPI
     /// </summary>
-    public static class GipghyAPIHandler
+    public static class GiphyAPIHandler
     {
         private const string PublicKey = "dc6zaTOxFJmzC";
         private const string BaseUrl = "http://api.giphy.com/v1/";

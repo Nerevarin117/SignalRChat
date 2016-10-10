@@ -29,7 +29,7 @@ namespace SignalRChat.Hubs
                 else
                 {
                     var keywords = message.Replace("/gif", "").Replace(" ","+");
-                    clients.All.addNewMessageToPage(name, GipghyAPIHandler.FindGifOnKeyword(keywords));
+                    clients.All.addNewMessageToPage(name, GiphyAPIHandler.FindGifOnKeyword(keywords));
                 }
                 
             }

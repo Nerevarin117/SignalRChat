@@ -11,7 +11,7 @@ namespace SignalRChat.Controllers
     {
         public PartialViewResult Selector(string keywords,int offset = 0,int limit=5)
         {
-            return PartialView("_GifSelector", GipghyAPIHandler.GifListFilter(keywords, limit, offset).data);
+            return PartialView("_GifSelector", GiphyAPIHandler.GifListFilter(keywords, limit, offset).data);
         }
     }
 }
