@@ -74,7 +74,7 @@ namespace SignalRChat.Hubs
                     bool isUrl = Uri.TryCreate(url, UriKind.Absolute, out uriResult) && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
                     if (isUrl)
                     {
-                        clients.All.addNewMessageToPage(name, "<div class='meme' style=background-image=url('" + url + "')><p class='top'>" + topCaption + "</p>  <p class='bottom'>" + botCaption + "</p></div>");
+                        clients.All.addNewMessageToPage(name, "<div class='meme' style=background-image:url('" + url + "')><p class='top'>" + topCaption + "</p>  <p class='bottom'>" + botCaption + "</p></div>");
                     }
                     else
                     {

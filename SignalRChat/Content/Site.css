@@ -49,7 +49,6 @@ input[type="checkbox"].input-validation-error {
 }
 
 .meme {
-  margin: auto;
   background-size: 100%; 
   text-align: center;
   position: relative;
