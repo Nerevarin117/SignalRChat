@@ -6,6 +6,9 @@ using Microsoft.AspNet.SignalR.Hubs;
 
 namespace SignalRChat.Hubs
 {
+    /// <summary>
+    /// Command parser to handle possible commands sent by users, some of the commands at handle on the client side , cf Commands.js file.
+    /// </summary>
     public class CommandParser
     {
 
@@ -15,8 +18,18 @@ namespace SignalRChat.Hubs
             //Command /gif
             if (message.IndexOf("/gif", StringComparison.Ordinal) == 0)
             {
-                var keywords = message.Replace("/gif", "").Split(' ');
-                clients.All.addNewMessageToPage("NativeCommand",GipghyAPIHandler.FindGifOnKeyword(keywords));
+                Uri uriResult;
+                var parameter = message.Replace("/gif", "");
+                bool isUrl = Uri.TryCreate(parameter, UriKind.Absolute, out uriResult) && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
+                if (isUrl)
+                {
+                    clients.All.addNewMessageToPage("Commander", "<img class='responsive' height='32' title='Powered By Giphy' src='" + parameter+ "' alt='Powered By Giphy'/>");
+                }
+                else
+                {
+                    var keywords = message.Replace("/gif", "").Replace(" ","+");
+                    clients.All.addNewMessageToPage("NativeCommand", GipghyAPIHandler.FindGifOnKeyword(keywords));
+                }
                 
             }
 

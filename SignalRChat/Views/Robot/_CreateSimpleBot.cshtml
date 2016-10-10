@@ -1,0 +1,104 @@
+﻿
+@model SignalRChat.Models.SimpleBotModel
+
+<div class="panel panel-primary" style="width:50%;height: 50%;max-height: 50%;max-width: 50%">
+    <div class="panel-heading">
+        <h3 class="panel-title">Create New Bot</h3>
+    </div>
+    <div class="panel-body">
+        @using (Html.BeginForm("Index", "Robot", FormMethod.Post, new { id = "RobotEditor" }))
+        {
+                <div style="border: thick solid black;">
+                    <div class="input-group">
+                        <div class="input-group-btn">
+                            <button type="button" class="btn btn-default">Operator</button>
+                            <button id="selectedOperator" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                                <li><a onclick="selectOperator(this)">&</a></li>
+                                <li><a onclick="selectOperator(this)">||</a></li>
+                            </ul>
+                        </div>
+                        <input id="newTrigger" type="text" class="form-control" placeholder="New Trigger Word...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" onclick="appendNewTrigger()"><span class="glyphicon glyphicon-plus"></span>&nbsp;Add</button>
+                        </span>
+                    </div>
+                    <div id="triggerList" class="panel panel-body">
+                        @foreach (var item in Model.Triggers)
+                        {
+                            <div class="trigger">
+                                <div class="label label-default" style='margin-right:10px'>@item.LogicOP</div>
+                                <div class="label label-success">@item.Word</div>
+                                <input id="triggerOP" name="triggerOP" value="@(item.LogicOP)" hidden="hidden" />
+                                <input id="triggerWord" name="triggerWord" value="@(item.Word)" hidden="hidden" />
+                            </div>
+
+                        }
+                    </div>
+                </div>
+                <div style="width: 50%;border-right: thick solid black;">&nbsp;</div>
+                <div class="text-center">
+                    <button id="modeToggler" class="btn label label-info" type="button" onclick="toggleMode()"><span class="glyphicon glyphicon-random"></span>&nbsp;Random Mode</button>
+                </div>
+                <div style="width: 50%;border-right: thick solid black;">&nbsp;</div>
+                <div style="border: thick solid black;">
+                    <div class="input-group">
+                        <input id="newResponse" type="text" class="form-control" placeholder="Enter new response...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" onclick="appendNewResponse()"><span class="glyphicon glyphicon-plus"></span>&nbsp;Add</button>
+                        </span>
+                    </div>
+                    <div class="panel panel-body" style="max-height: 400px;overflow: auto">
+                        <table id="responseList" style="width:100%">
+                            <tr>
+                                @foreach (var item in Model.Response)
+                            {
+                                    <td>
+                                        <div class="text-info">@item</div>
+                                        <input name="responseItem" value="@(item)" hidden="hidden" />
+                                    </td>
+                            }
+                            </tr>
+                        </table>
+                    </div>
+
+                </div>
+
+                <button class="btn btn-default" type="submit" style="width: 100%">Submit</button>
+
+                }
+            </div>
+</div>
+
+<script>
+
+    function appendNewResponse() {
+        $("#responseList").append("<tr ><td> <div class='text-info'>" + $("#newResponse").val() + "</div><input value='" + $("#newResponse").val() + "' hidden='hidden' /></td></tr>");
+    }
+
+    function appendNewTrigger() {
+        $("#triggerList").append("<div class='trigger'><div class='label label-default' style='margin-right:10px'>" + $("#selectedOperator").text() + "</div><div class='label label-success'>" + $("#newTrigger").val() + "</div><input value='" + $("#newTrigger").val() + "' hidden='hidden' /></div>");
+    }
+    function selectOperator(e) {
+        $("#selectedOperator").text($(e).text());
+    }
+    function toggleMode() {
+        var text = $("#modeToggler").text();
+        if (text.indexOf("Synchronized") !== -1) {
+            $("#modeToggler").html("<span class='glyphicon glyphicon-random'></span>&nbsp;Random Mode");
+        } else {
+            $("#modeToggler").html("<span class='glyphicon glyphicon-sort'></span>&nbsp;Synchronized Mode");
+        }
+        
+    }
+</script>
+<style>
+    .trigger {
+        display: inline-flex;
+        padding: 5px;
+    }
+    .label {
+         font-size: 100%;
+         padding-right: 5px;
+    }
+</style>

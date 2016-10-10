@@ -1,0 +1,19 @@
+﻿@model List<SignalRChat.Models.GifModel>
+
+<div class="panel">
+    <ul>
+        @foreach (var gif in Model)
+        {
+            <li>
+                <img src="@(gif.images.fixed_height_small)" title="Powered By Giphy" alt="Powered By Giphy" />
+                <div class="btn btn-default" role="button" onclick="selectGif()">Send</div>
+            </li>
+        }
+    </ul>
+</div>
+
+<script>
+    function selectGif() {
+        $("#sendmessage").click();
+    }
+</script>
