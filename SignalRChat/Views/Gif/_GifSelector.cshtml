@@ -1,11 +1,11 @@
 ﻿@model List<SignalRChat.Models.GifModel>
 
-<div class="panel">
+<div id="gifSelectionPanel" class="panel">
     <ul>
         @foreach (var gif in Model)
         {
             <li>
-                <img src="@(gif.images.fixed_height_small)" title="Powered By Giphy" alt="Powered By Giphy" />
+                <img src="@(gif.images.fixed_height_small.url)" title="Powered By Giphy" alt="Powered By Giphy" />
                 <div class="btn btn-default" role="button" onclick="selectGif()">Send</div>
             </li>
         }
@@ -14,6 +14,12 @@
 
 <script>
     function selectGif() {
-        $("#sendmessage").click();
+        $('#sendmessage').click(function (e) {
+            e.preventDefault();
+
+            // Clear text box and reset focus for next comment.
+            $('#message').val('').focus();
+
+        });
     }
 </script>

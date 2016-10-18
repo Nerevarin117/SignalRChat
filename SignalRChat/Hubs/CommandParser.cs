@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Microsoft.AspNet.SignalR.Hubs;
+using System.Text.RegularExpressions;
 
 namespace SignalRChat.Hubs
 {
@@ -23,12 +24,12 @@ namespace SignalRChat.Hubs
                 bool isUrl = Uri.TryCreate(parameter, UriKind.Absolute, out uriResult) && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
                 if (isUrl)
                 {
-                    clients.All.addNewMessageToPage("Commander", "<img class='responsive' height='32' title='Powered By Giphy' src='" + parameter+ "' alt='Powered By Giphy'/>");
+                    clients.All.addNewMessageToPage(name, "<img class='responsive' title='Powered By Giphy' src='" + parameter+ "' alt='Powered By Giphy'/>");
                 }
                 else
                 {
                     var keywords = message.Replace("/gif", "").Replace(" ","+");
-                    clients.All.addNewMessageToPage("NativeCommand", GipghyAPIHandler.FindGifOnKeyword(keywords));
+                    clients.All.addNewMessageToPage(name, GiphyAPIHandler.FindGifOnKeyword(keywords));
                 }
                 
             }
@@ -56,9 +57,34 @@ namespace SignalRChat.Hubs
                 
 
             }
+            if (message.IndexOf("/meme", StringComparison.Ordinal) == 0)
+            {
+                Uri uriResult;
+                var regex = new Regex("\\\".*?\\\"");
+                var match = regex.Matches(message);
+                if(match==null || match.Count != 3)
+                {
+                    clients.User(name).send("Error", "Invalid Parameters for the command /meme.");
+                }
+                else
+                {
+                    var url = match[0].Value.Replace("\"","");
+                    var topCaption = match[1].Value.Replace("\"", "");
+                    var botCaption = match[2].Value.Replace("\"", "");
+                    bool isUrl = Uri.TryCreate(url, UriKind.Absolute, out uriResult) && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
+                    if (isUrl)
+                    {
+                        clients.All.addNewMessageToPage(name, "<div class='meme' style=background-image:url('" + url + "')><p class='top'>" + topCaption + "</p>  <p class='bottom'>" + botCaption + "</p></div>");
+                    }
+                    else
+                    {
+                        clients.User(name).send("Error", "Invalid Url.");
+
+                    }
+                }
                 
-        }
 
-
+            }
+       }
     }
 }

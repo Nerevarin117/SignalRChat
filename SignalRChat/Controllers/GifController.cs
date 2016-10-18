@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SignalRChat.Hubs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,10 +9,9 @@ namespace SignalRChat.Controllers
 {
     public class GifController : Controller
     {
-        public PartialViewResult SelectGif(int offset = 0,int limit=5)
+        public PartialViewResult Selector(string keywords,int offset = 0,int limit=5)
         {
-
-            return PartialView("_GifSelector");
+            return PartialView("_GifSelector", GiphyAPIHandler.GifListFilter(keywords, limit, offset).data);
         }
 
         public PartialViewResult DisplayGif(string username,string keywords)
