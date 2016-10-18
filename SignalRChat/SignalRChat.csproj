@@ -506,6 +506,7 @@
     <Content Include="Views\Robot\_CreateSimpleBot.cshtml" />
     <Content Include="Views\Robot\_CreateAdvertiser.cshtml" />
     <Content Include="Views\Gif\_GifSelector.cshtml" />
+    <Content Include="Views\Gif\_GifDisplayer.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

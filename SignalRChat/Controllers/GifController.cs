@@ -13,5 +13,11 @@ namespace SignalRChat.Controllers
 
             return PartialView("_GifSelector");
         }
+
+        public PartialViewResult DisplayGif(string username,string keywords)
+        {
+
+            return PartialView("_GifDisplayer");
+        }
     }
 }
