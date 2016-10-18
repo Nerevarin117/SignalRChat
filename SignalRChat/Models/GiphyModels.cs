@@ -44,4 +44,12 @@ namespace SignalRChat.Models
         public string fixed_height_small_url { get; set; }
 
     }
+
+    public class SelectGifViewModel
+    {
+        public List<GifModel> Selection { get; set; }
+        public string Keywords { get; set; }
+        public string Offset { get; set; }
+        public string Limit { get; set; }
+    }
 }

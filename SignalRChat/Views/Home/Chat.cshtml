@@ -29,7 +29,7 @@
                         </div>
                     </div>
                     <div class="col-lg-9 chat" style="height:calc(75vh);">
-                        <div class="panel" style="background-color: white;height: 100%;max-height:700px;overflow-y:auto">
+                        <div class="panel" style="background-color: white;height: 100%;overflow-y:auto">
                             <ul id="discussion" style="list-style-type: none;padding: 10px;background-color: white">
                                 <li>
                                     <i>Welcome In the Chat Room!</i>
@@ -37,6 +37,19 @@
                                 <li>
                                     <hr>
                                 </li>
+                                <li>
+                                    <div >
+                                        <div class="panel-heading" style="padding: 2px 4px!important;background-color: #cbd8df;display: -webkit-inline-box;" data-toggle="collapse" data-target="#collapseGif" aria-expanded="false" aria-controls="collapseGif">
+                                            <div class="label label-info">GifBot</div>&nbsp;
+                                            <div>triggered by</div>&nbsp;
+                                            <div class="label label-primary">Username</div>
+                                        </div>
+                                        <div class="collapse" id="collapseGif" style="border-left: #cbd8df thick solid">
+                                            <img class="img-responsive" height='32' title='Powered By Giphy' src="http://media0.giphy.com/media/umgeSurMcyA8g/100.gif" alt='Powered By Giphy' />
+                                        </div>
+                                    </div>
+                                </li>
+                                
                             </ul>
                         </div>
                     </div>
@@ -150,7 +163,7 @@
         </div>
     </div>
 </div>
-@Scripts.Render("~/bundles/chat");
+@Scripts.Render("~/bundles/chat")
 @section scripts {
     <!--Script references. -->
     <!--The jQuery library is required and is referenced by default in _Layout.cshtml. -->

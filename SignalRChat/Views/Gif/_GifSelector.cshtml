@@ -1,15 +1,36 @@
-﻿@model List<SignalRChat.Models.GifModel>
+﻿@model SignalRChat.Models.SelectGifViewModel
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")
+
 
 <div id="gifSelectionPanel" class="panel">
-    <ul>
-        @foreach (var gif in Model)
-        {
+ 
+        <ul style="list-style-type: none;">
+            @foreach (var gif in Model.Selection)
+            {
+                <li>
+                    <div style="border-left: #cbd8df thick solid">
+                        <img src="@(gif.images.fixed_height_small.url)" title="Powered By Giphy" alt="Powered By Giphy" />
+                    </div>
+                    <div class="btn btn-default" role="button" onclick="selectGif()">Send</div>
+                </li>
+            }
+        </ul>
+        <ul style="list-style-type: none;">
             <li>
-                <img src="@(gif.images.fixed_height_small.url)" title="Powered By Giphy" alt="Powered By Giphy" />
-                <div class="btn btn-default" role="button" onclick="selectGif()">Send</div>
+                @using (Html.BeginForm("Select", "Gif", FormMethod.Get, new { @class = "form-inline", @role = "form", @id = "formLoader" }))
+                {
+                    @Html.Hidden("Keywords", Model.Keywords)
+                    @Html.Hidden("Offset", Model.Offset)
+                    @Html.Hidden("Limit", Model.Limit)
+                    <button class="btn btn-default" type="submit" role="button" >Load More...</button>
+                    <div class="btn btn-default" role="button" onclick="cancel()">Cancel</div>
+
+                }
             </li>
-        }
-    </ul>
+        </ul>
 </div>
 
 <script>
@@ -21,5 +42,25 @@
             $('#message').val('').focus();
 
         });
+    }
+
+    $("#formLoader").submit(function(e) {
+        e.preventDefault();
+
+        $.ajax({
+            url: "/Gif/Select",
+            type: "GET",
+            data: $("#formLoader").serialize(),
+            success: function (response) {
+                $('#gifSelectorContainer').html(response);
+            },
+            error: function (response) {
+                alert("Error with Command /gifs");
+            }
+        });
+    });
+
+    function cancel() {
+        $("#gifSelectionPanel").remove();
     }
 </script>
