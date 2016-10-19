@@ -53,3 +53,5 @@ Temporary Items
 SignalRChat.v12.suo
 sRC-Database/sRC-Database.dbmdl
 *.cache
+SignalRChat/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+*.cache
