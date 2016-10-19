@@ -29,5 +29,10 @@ namespace SignalRChat.Controllers
 
             return PartialView("_GifDisplayer");
         }
+
+        public PartialViewResult MemeBuilder()
+        {
+            return PartialView("_MemeBuilder");
+        }
     }
 }

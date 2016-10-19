@@ -1,0 +1,99 @@
+﻿@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")
+
+
+<div id="memeBuilder" class="panel">
+    <div class="input-group">
+        <span class="input-group-addon">Image Url</span>
+        <input class="form-control" id="imgUrl" type="text" />
+    </div>
+
+    <div class="input-group">
+        <span class="input-group-addon">Caption Top</span>
+        <input class="form-control" id="captionTop" type="text" />
+    </div>
+
+    <div class="input-group">
+        <span class="input-group-addon">Caption Bot</span>
+        <input class="form-control" id="captionBot" type="text" />
+    </div>
+
+    <div id="meme" class='meme' style="overflow:hidden;">
+        <p id="topDemo" class='memeCaption top'></p>
+        <p id="bottomDemo" class='memeCaption bottom'></p>
+    </div>
+    <div class="input-group">
+        <div class="btn btn-default" role="button">Done</div>
+        <div class="btn btn-default" role="button" onclick="cancel()">Cancel</div>
+    </div>
+</div>
+
+
+
+<script>
+
+    $("#captionTop").on("input", function () {
+
+        $('#topDemo').text($("#captionTop").val());
+
+    });
+
+    $("#captionBot").on("input", function () {
+
+        $('#bottomDemo').text($("#captionBot").val());
+
+    });
+
+    $("#imgUrl").on("input", function () {
+
+        $('#meme').css('background', 'no-repeat url(' + $("#imgUrl").val() + ')');
+
+
+    });
+
+
+</script>
+
+<style>
+   
+    
+     .meme {
+         background-size: 100%; 
+         text-align: center;
+         position: relative;
+         width: 150px;
+         height: 150px;
+     }
+
+    .memeCaption{
+        position: absolute; 
+        left: 0;
+        right: 0; 
+        margin: 15px 0;
+        padding: 0 5px;
+        font-family: impact;
+        font-size: 2.5em;
+        text-transform: uppercase;
+        color: white;
+        letter-spacing: 1px;
+        text-shadow:2px 2px 0 #000,
+                    -2px -2px 0 #000,
+                    2px -2px 0 #000,
+                    -2px 2px 0 #000,
+                    0px 2px 0 #000,
+                    2px 0px 0 #000,
+                    0px -2px 0 #000,
+                    -2px 0px 0 #000,
+                    2px 2px 5px #000;
+    }
+
+    .bottom {
+        bottom: 0;
+    }
+
+    .top {
+        top: 0;
+    }
+</style>

@@ -59,10 +59,9 @@ namespace SignalRChat.Hubs
             }
             if (message.IndexOf("/meme", StringComparison.Ordinal) == 0)
             {
-                Uri uriResult;
                 var regex = new Regex("\\\".*?\\\"");
                 var match = regex.Matches(message);
-                if(match==null || match.Count != 3)
+                if( match.Count != 3)
                 {
                     clients.User(name).send("Error", "Invalid Parameters for the command /meme.");
                 }
@@ -71,10 +70,11 @@ namespace SignalRChat.Hubs
                     var url = match[0].Value.Replace("\"","");
                     var topCaption = match[1].Value.Replace("\"", "");
                     var botCaption = match[2].Value.Replace("\"", "");
+                    Uri uriResult;
                     bool isUrl = Uri.TryCreate(url, UriKind.Absolute, out uriResult) && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
                     if (isUrl)
                     {
-                        clients.All.addNewMessageToPage(name, "<div class='meme' style=background-image:url('" + url + "')><p class='top'>" + topCaption + "</p>  <p class='bottom'>" + botCaption + "</p></div>");
+                        clients.All.addNewMessageToPage(name, "<div class='meme' style=background:no-repeat url('" + url + "')><p class='top'>" + topCaption + "</p>  <p class='bottom'>" + botCaption + "</p></div>");
                     }
                     else
                     {

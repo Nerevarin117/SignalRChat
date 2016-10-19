@@ -15,10 +15,26 @@
             url: "/Gif/Select?Keywords=" + param,
             type: "GET",
             success: function (response) {
-                $('#discussion').append('<li id="gifSelectorContainer">' + response + '</li>');
+                $('#discussion').append('<li id="commandHelper">' + response + '</li>');
             },
-            error: function (response) {
+            error: function () {
                 alert("Error with Command /gifs");
+            }
+        });
+
+        return true;
+    }
+
+    if (message.indexOf("/meme") == 0) {
+
+        $.ajax({
+            url: "/Gif/MemeBuilder",
+            type: "GET",
+            success: function (response) {
+                $('#discussion').append('<li id="commandHelper">' + response + '</li>');
+            },
+            error: function () {
+                alert("Error with Command /meme");
             }
         });
 

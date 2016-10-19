@@ -10,16 +10,16 @@
     <div id="chatPanel" class="col-lg-9">
         <div class="panel panel-chat">
             <div class="panel-heading text-center" style="color:white">
-                <h3 class="panel-title">Chat Box</h3>  
+                <h3 class="panel-title">"Room Name" - Chat Box</h3>  
                 <div class="btn" role="button" onclick="toggleFullScreen()" style="position:absolute;right: 15px;top: 10px;"><span id="screenIcon" class="glyphicon glyphicon-resize-full" ></span></div>                             
             </div>
             <div class="panel-body chat" style="max-height: 100%;">
                 <div class="row chat">
                     <div class="col-lg-3 chat" >
-                        <div class="panel" style="background-color: white;height: 100%;max-height:700px;overflow-y:auto;overflow-x:hidden;">
-                            <ul style="list-style-type:none;padding: 10px;background-color: white;">
+                        <div class="panel" style="background-color: white;height: 100%;max-height:300px;overflow-y:auto;overflow-x:hidden;">
+                            <ul id="userList" style="list-style-type:none;padding: 10px;background-color: white;">
                                 <li>
-                                    In the Room :
+                                    Curent Room :
                                 </li>
                                 <li>
                                     <hr>
@@ -37,19 +37,6 @@
                                 <li>
                                     <hr>
                                 </li>
-                                <li>
-                                    <div >
-                                        <div class="panel-heading" style="padding: 2px 4px!important;background-color: #cbd8df;display: -webkit-inline-box;" data-toggle="collapse" data-target="#collapseGif" aria-expanded="false" aria-controls="collapseGif">
-                                            <div class="label label-info">GifBot</div>&nbsp;
-                                            <div>triggered by</div>&nbsp;
-                                            <div class="label label-primary">Username</div>
-                                        </div>
-                                        <div class="collapse" id="collapseGif" style="border-left: #cbd8df thick solid">
-                                            <img class="img-responsive" height='32' title='Powered By Giphy' src="http://media0.giphy.com/media/umgeSurMcyA8g/100.gif" alt='Powered By Giphy' />
-                                        </div>
-                                    </div>
-                                </li>
-                                
                             </ul>
                         </div>
                     </div>
@@ -95,7 +82,7 @@
                                 <b>/gifs &lt;keywork(s)&gt; :</b> will browse online several gifs and let you chose between them.
                             </li>
                             <li>
-                                <b>/meme "image-url" "caption-top" "caption-bottom" : </b> Will display the image and write your caption on top of it.
+                                <b>/meme : </b> Will display a meme builder.
                             </li>
                             <li>
                                 <b>/clear : </b> Clear the chat messages.
