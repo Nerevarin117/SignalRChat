@@ -509,6 +509,7 @@
     <Content Include="Views\Gif\_GifSelector.cshtml" />
     <Content Include="Views\Gif\_GifDisplayer.cshtml" />
     <Content Include="Views\Gif\_MemeBuilder.cshtml" />
+    <Content Include="Views\Robot\_DisplayBot.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
