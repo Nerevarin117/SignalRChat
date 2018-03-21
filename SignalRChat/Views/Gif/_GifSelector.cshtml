@@ -14,7 +14,7 @@
                     <div style="border-left: #cbd8df thick solid">
                         <img src="@(gif.images.fixed_height_small.url)" title="Powered By Giphy" alt="Powered By Giphy" />
                     </div>
-                    <div class="btn btn-default" role="button" onclick="selectGif()">Send</div>
+                    <div class="btn btn-default" role="button" onclick="selectGif('@(gif.images.fixed_height_small.url)')">Send</div>
                 </li>
             }
         </ul>
@@ -32,35 +32,3 @@
             </li>
         </ul>
 </div>
-
-<script>
-    function selectGif() {
-        $('#sendmessage').click(function (e) {
-            e.preventDefault();
-
-            // Clear text box and reset focus for next comment.
-            $('#message').val('').focus();
-
-        });
-    }
-
-    $("#formLoader").submit(function(e) {
-        e.preventDefault();
-
-        $.ajax({
-            url: "/Gif/Select",
-            type: "GET",
-            data: $("#formLoader").serialize(),
-            success: function (response) {
-                $('#gifSelectorContainer').html(response);
-            },
-            error: function () {
-                alert("Error with Command /gifs");
-            }
-        });
-    });
-
-    function cancel() {
-        $("#gifSelectionPanel").remove();
-    }
-</script>

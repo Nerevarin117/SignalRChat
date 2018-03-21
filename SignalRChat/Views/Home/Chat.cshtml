@@ -2,12 +2,10 @@
     ViewBag.Title = "Chat";
 }
 
-<div class="row">
-    <div class="panel" style="background-color: black;">
-    </div>
+<div id="displayname" hidden>
 </div>
 <div class="row">
-    <div id="chatPanel" class="col-lg-9">
+    <div id="chatPanel" class="col-lg-9 nopadding">
         <div class="panel panel-chat">
             <div class="panel-heading text-center" style="color:white">
                 <h3 class="panel-title">"Room Name" - Chat Box</h3>  
@@ -56,7 +54,7 @@
             </div>
         </div>
     </div>
-    <div id="commandPanel" class="col-lg-3">
+    <div id="commandPanel" class="col-lg-3 panel-command nopadding">
         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
             <div class="panel panel-default">
                 <div class="panel-heading text-center" role="tab" id="headingTwo">
@@ -160,6 +158,7 @@
     <script src="~/signalr/hubs"></script>
     <!--SignalR script to update the chat page and send messages.-->
     <script>
+        var chat = null;
         $(function () {
 
             //Auto click Send
@@ -170,7 +169,7 @@
             });
 
             // Reference the auto-generated proxy for the hub.
-            var chat = $.connection.chatHub;
+            chat = $.connection.chatHub;
             // Create a function that the hub can call back to display messages.
             chat.client.addNewMessageToPage = function (name, message) {
                 // Add the message to the page.

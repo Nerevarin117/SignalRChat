@@ -11,6 +11,13 @@ body {
     background-color: darkslategrey;
     font-family : 'comic neue';
 }
+html, body{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
@@ -25,6 +32,10 @@ body {
 .panel-chat{
     background-color:rgba(63, 67, 130, 0.67);
     border-color:black;
+}
+
+.panel-command{
+
 }
 
 /* Set width on the form input elements since they're 100% wide by default 
@@ -57,5 +68,15 @@ input[type="checkbox"].input-validation-error {
 
 .validation-summary-valid {
     display: none;
+}
+
+.nopadding {
+    padding-right: 0px;
+    padding-left: 0px;
+}
+
+.defaultpadding {
+    padding-right: 15px;
+    padding-left: 15px;
 }
 
