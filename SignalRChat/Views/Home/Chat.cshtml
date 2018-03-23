@@ -5,44 +5,54 @@
 <div id="displayname" hidden>
 </div>
 <div class="row">
-    <div id="chatPanel" class="col-lg-9 nopadding">
+    <div id="roomPanel" class="col-lg-2 nopadding">
+        <div id="roomPanelHeader" class="panel-heading text-center chat-panel-heading">
+            Participants           
+        </div>
+        <div id="roomPanelDetail" class="chat">
+            <div class="panel room-detail" style="height: 100%;max-height:300px;overflow-y:auto;overflow-x:hidden;">
+                <ul id="userList" style="list-style-type:none;padding: 10px;">
+                    <li>
+                        Curent Room :
+                    </li>
+                    <li>
+                        <hr>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div id="chatPanel" class="col-lg-7 nopadding">
         <div class="panel panel-chat">
-            <div class="panel-heading text-center" style="color:white">
-                <h3 class="panel-title">"Room Name" - Chat Box</h3>  
-                <div class="btn" role="button" onclick="toggleFullScreen()" style="position:absolute;right: 15px;top: 10px;"><span id="screenIcon" class="glyphicon glyphicon-resize-full" ></span></div>                             
+            
+            <div class="panel-heading text-center chat-panel-heading">
+                <div class="btn btn-nopadding" role="button" onclick="toggleRoom()" style="position:absolute;left: 15px;top: 10px;">
+                    <span id="roomIcon" class="glyphicon glyphicon-chevron-left"></span>
+                </div>
+                <div class="panel-title chat-panel-title">"Room Name" - Chat Box
+                </div>  
+                <div class="btn btn-nopadding" role="button" onclick="toggleFullScreen()" style="position:absolute;right: 15px;top: 10px;"><span id="screenIcon" class="glyphicon glyphicon-resize-full" ></span>
+                </div>                             
             </div>
             <div class="panel-body chat" style="max-height: 100%;">
-                <div class="row chat">
-                    <div class="col-lg-3 chat" >
-                        <div class="panel" style="background-color: white;height: 100%;max-height:300px;overflow-y:auto;overflow-x:hidden;">
-                            <ul id="userList" style="list-style-type:none;padding: 10px;background-color: white;">
-                                <li>
-                                    Curent Room :
-                                </li>
-                                <li>
-                                    <hr>
-                                </li>
-
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-9 chat" style="height:calc(75vh);">
-                        <div class="panel" style="background-color: white;height: 100%;overflow-y:auto">
-                            <ul id="discussion" style="list-style-type: none;padding: 10px;background-color: white">
+                <div class="row chat">                   
+                    <div class="col-lg-12 chat" style="height:calc(75vh);">
+                        <div class="panel chat-box" style="height: 100%;overflow-y:auto">
+                            <ul id="discussion" style="list-style-type: none;padding: 10px;">
                                 <li>
                                     <i>Welcome In the Chat Room!</i>
                                 </li>
                                 <li>
-                                    <hr>
+                                    <hr style="border-top: 1px solid #000000;">
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </div>
-                <div class="row chat" style="padding-top: 2%">
-                    <div class="col-lg-3">
-                    </div>
-                    <div class="col-lg-9">
+                <div class="row chat" style="padding-bottom: 1%;padding-top:1%">
+                    <div class="col-lg-12">
                         <div class="input-group">
                             <input id="message" type="text" class="form-control" placeholder="New Message...">
                             <span class="input-group-btn">
@@ -149,6 +159,9 @@
     </div>
 </div>
 @Scripts.Render("~/bundles/chat")
+@section styles{
+    <link rel="Stylesheet" href="@Href("~/Content/ChatThemes/StyleSheet2.css")" />
+}
 @section scripts {
     <!--Script references. -->
     <!--The jQuery library is required and is referenced by default in _Layout.cshtml. -->
@@ -193,20 +206,23 @@
             $('#message').focus();
             // Start the connection.
             $.connection.hub.start().done(function () {
-                $('#sendmessage').click(function () {
+                $('#sendmessage').click(function () {                    
 
                     $("#newMessageNotif").remove();
                     cancelFlashTitle();
 
-                    // parse and execute client side commands if any
-                    if (executeCommands($('#message').val())) {
+                    if ($('#message').val().length > 0) {
+                        // parse and execute client side commands if any
+                        if (executeCommands($('#message').val())) {
+                            $('#message').val('').focus();
+                            return;
+                        }
+                        // Call the Send method on the hub.
+                        chat.server.send($('#displayname').val(), $('#message').val());
+                        // Clear text box and reset focus for next comment.
                         $('#message').val('').focus();
-                        return;
                     }
-                    // Call the Send method on the hub.
-                    chat.server.send($('#displayname').val(), $('#message').val());
-                    // Clear text box and reset focus for next comment.
-                    $('#message').val('').focus();
+                 
                 });
             });
         });
@@ -221,17 +237,43 @@
             if(!fullscreen){
                 fullscreen = true;                
                 $("#commandPanel").hide();
-                $("#chatPanel").removeClass("col-lg-9");
-                $("#chatPanel").addClass("col-lg-12");
-                $("#screenIcon").removeClass("glyphicon-resize-full");
-                $("#screenIcon").addClass("glyphicon-resize-small");
+                $("#chatPanel").removeClass("col-lg-7");
+                if (roomHidden)
+                    $("#chatPanel").addClass("col-lg-12");
+                else
+                    $("#chatPanel").addClass("col-lg-10");
+                $("#screenIcon").removeClass("glyphicon-resize-small");
+                $("#screenIcon").addClass("glyphicon-resize-full");
             } else {
                 fullscreen = false;
-                $("#chatPanel").removeClass("col-lg-12");
-                $("#chatPanel").addClass("col-lg-9");
+                if (roomHidden)
+                    $("#chatPanel").removeClass("col-lg-12");
+                else
+                    $("#chatPanel").removeClass("col-lg-10");
+                $("#chatPanel").addClass("col-lg-7");
+               
                 $("#screenIcon").removeClass("glyphicon-resize-small");
                 $("#screenIcon").addClass("glyphicon-resize-full");
                 $("#commandPanel").show();
+            }
+        }
+        var roomHidden;
+        function toggleRoom() {
+            if (!roomHidden) {
+                $("#roomPanel").hide();
+                $("#screenIcon").removeClass("glyphicon-chevron-left");
+                $("#screenIcon").addClass("glyphicon-chevron-right");
+                roomHidden = true;
+                
+;               
+
+            } else {
+                $("#roomPanel").show();
+                $("#screenIcon").removeClass("glyphicon-chevron-right");
+                $("#screenIcon").addClass("glyphicon-chevron-left");
+                roomHidden = false;
+                
+               
             }
         }
 

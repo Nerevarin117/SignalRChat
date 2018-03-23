@@ -210,6 +210,9 @@
     <Content Include="Content\Backgrounds\cloud.jpg" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\ChatThemes\StyleDefault.css" />
+    <Content Include="Content\ChatThemes\StyleSheet2.css" />
+    <Content Include="Content\ChatThemes\StyleSheet3.css" />
     <Content Include="Content\Flags\ad.png" />
     <Content Include="Content\Flags\ae.png" />
     <Content Include="Content\Flags\af.png" />

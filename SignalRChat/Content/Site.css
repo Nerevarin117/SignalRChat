@@ -11,6 +11,23 @@ body {
     background-color: darkslategrey;
     font-family : 'comic neue';
 }
+
+.registerPanel{
+    color:white;
+    background-color : transparent;
+}
+
+.registerPanel .form-control{
+    color: white;
+    background-color: transparent;
+}
+
+    .registerPanel .form-control:focus {
+        border-color: rgba(255, 255, 255, 0.8);
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(255, 255, 255, 0.6);
+        outline: 0 none;
+    }
+
 html, body{
     position: fixed;
     top: 0;
@@ -25,17 +42,25 @@ html, body{
     padding-right: 15px;
 }
 
-.chat{
+.chat-box {
+    background-color: #f0f3bd;
+}
+
+.chat {
     background-color: transparent;
 }
 
-.panel-chat{
-    background-color:rgba(63, 67, 130, 0.67);
-    border-color:black;
+.panel-chat {
+    background-color: rgba(63, 67, 130, 0.67);
+    border-color: black;
 }
 
-.panel-command{
+.panel-command {
+    background-color: rgba(63, 67, 130, 0.67);
+}
 
+.room-detail {
+    background-color: white;
 }
 
 /* Set width on the form input elements since they're 100% wide by default 
@@ -73,6 +98,10 @@ input[type="checkbox"].input-validation-error {
 .nopadding {
     padding-right: 0px;
     padding-left: 0px;
+}
+
+.btn-nopadding {
+    padding: 0px
 }
 
 .defaultpadding {

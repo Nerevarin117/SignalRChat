@@ -1,0 +1,20 @@
+﻿.chat {
+    background-color: transparent;
+}
+
+.panel-chat {
+    background-color: rgba(63, 67, 130, 0.67);
+    border-color: black;
+}
+
+.panel-command .panel-heading {
+    background-color: rgba(63, 67, 130, 0.67);
+}
+
+.panel-command {
+    background-color: rgba(63, 67, 130, 0.67);
+}
+
+
+.room-detail {
+}
