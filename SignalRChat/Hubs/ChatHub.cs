@@ -20,9 +20,11 @@ namespace SignalRChat
                 message = StickerParser.ParseStickers(message);
 
                 Clients.All.addNewMessageToPage(name, message);
-            }               
+                Clients.All.addHtmlToPage("<i>test<i>");
+                //https://stackoverflow.com/questions/11642815/render-mvc-partialview-into-signalr-response
+            }
 
-           
+
         }
     }
 }

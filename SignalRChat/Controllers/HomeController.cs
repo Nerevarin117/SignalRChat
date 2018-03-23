@@ -23,9 +23,9 @@ namespace SignalRChat.Controllers
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
-
+            
             return View();
-        }
+        }      
 
  
         public ActionResult Chat()

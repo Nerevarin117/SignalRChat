@@ -48,6 +48,10 @@
                                     <hr style="border-top: 1px solid #000000;">
                                 </li>
                             </ul>
+                            <div class="container" style="width:100%">
+                                @Html.Partial("_MediaObject")
+                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -161,6 +165,7 @@
 @Scripts.Render("~/bundles/chat")
 @section styles{
     <link rel="Stylesheet" href="@Href("~/Content/ChatThemes/StyleSheet2.css")" />
+<link rel="Stylesheet" href="@Href("~/Content/BotQuote/QuoteStyleDefault.css")" />
 }
 @section scripts {
     <!--Script references. -->
@@ -183,6 +188,12 @@
 
             // Reference the auto-generated proxy for the hub.
             chat = $.connection.chatHub;
+
+            //Test pure html appending
+            chat.client.addHtmlToPage = function (html) {
+                $('#discussion').append(html);
+            }
+
             // Create a function that the hub can call back to display messages.
             chat.client.addNewMessageToPage = function (name, message) {
 
@@ -193,11 +204,12 @@
                     if ($("#newMessageNotif").length == 0)
                     $('#discussion').append('<li id="newMessageNotif" class="hr">New</li>'); 
                 }
-
                 
                 // Add the message to the page.
-                $('#discussion').append('<li><strong>' + htmlEncode(name)
-                + '</strong> : ' + message + '</li>');                
+               
+                
+                $('#discussion').append('<li style="display:flex;"><div id="senderThumb"><strong>' + htmlEncode(name)
+                    + '</strong></div> &nbsp;:  &nbsp;<div id="messageBody" class="bubble">' + message + '</div></li>');              
                 
             };
             // Get the user name and store it to prepend to messages.
