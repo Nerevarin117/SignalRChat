@@ -19,9 +19,11 @@ namespace SignalRChat
             {
                 message = StickerParser.ParseStickers(message);
 
-                Clients.All.addNewMessageToPage(name, message);
-                Clients.All.addHtmlToPage("<i>test<i>");
-                //https://stackoverflow.com/questions/11642815/render-mvc-partialview-into-signalr-response
+                //Clients.All.addNewMessageToPage(name, message);
+                //Clients.All.addHtmlToPage("<i>test<i>");
+                Clients.All.useReactToRenderMessage(new { message = message });
+                //go renvoyer du json et utiliser React
+
             }
 
 
