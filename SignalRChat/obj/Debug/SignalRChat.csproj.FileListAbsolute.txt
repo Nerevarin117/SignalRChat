@@ -221,3 +221,8 @@ C:\Users\mgillet\Source\Repos\SignalRChat\SignalRChat\bin\ru-ru\JavaScriptEngine
 C:\Users\mgillet\Source\Repos\SignalRChat\SignalRChat\bin\ru-ru\JavaScriptEngineSwitcher.Core.resources.dll
 C:\Users\mgillet\Source\Repos\SignalRChat\SignalRChat\bin\ru-ru\JavaScriptEngineSwitcher.V8.resources.dll
 C:\Users\mgillet\Source\Repos\SignalRChat\SignalRChat\bin\ru-ru\MsieJavaScriptEngine.resources.dll
+C:\Users\mgillet\Source\Repos\SignalRChat\SignalRChat\bin\React.Web.dll
+C:\Users\mgillet\Source\Repos\SignalRChat\SignalRChat\bin\React.Web.Mvc4.dll
+C:\Users\mgillet\Source\Repos\SignalRChat\SignalRChat\bin\WebActivatorEx.dll
+C:\Users\mgillet\Source\Repos\SignalRChat\SignalRChat\bin\React.Web.xml
+C:\Users\mgillet\Source\Repos\SignalRChat\SignalRChat\bin\React.Web.Mvc4.xml

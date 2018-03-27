@@ -48,7 +48,7 @@
                                     <hr style="border-top: 1px solid #000000;">
                                 </li>
                             </ul>
-                            <div class="container" style="width:100%">
+                            <div id="messageList" class="container" style="width:100%">
                                 @Html.Partial("_MediaObject")
                             </div>
                             
@@ -176,8 +176,9 @@
     <script src="~/signalr/hubs"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/remarkable/1.7.1/remarkable.min.js"></script>
     <!--SignalR script to update the chat page and send messages.-->
-<script type="text/jsx" src="@Url.Content("~/Scripts/chatMessage.jsx")">
+    <script src="@Url.Content("~/Scripts/Components/chatMessage.jsx")">
     </script>
     <script>
        
@@ -200,8 +201,10 @@
             }
 
             chat.client.useReactToRenderMessage = function (data) {      
-                var elem = React.createElement(CommentBox, data, null);
-                $('#container').append(elem);
+                ReactDOM.render(
+                    React.createElement(CommentBox, { data: data }, null),
+                    document.getElementById('messageList')
+                );
 
             }
 
