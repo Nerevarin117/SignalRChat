@@ -21,8 +21,9 @@
     </div>
 
     <div id="meme" class='meme' style="overflow:hidden;">
-        <p id="topDemo" class='memeCaption top'></p>
-        <p id="bottomDemo" class='memeCaption bottom'></p>
+        <img id="memeImage" style="float:left" src=""/>
+        <p id="topDemo" class='memeCaption top' style="top:0"></p>
+        <p id="bottomDemo" class='memeCaption bottom'  style="bottom:0"></p>
     </div>
     <div class="input-group">
         <div class="btn btn-default" role="button">Done</div>
@@ -35,21 +36,21 @@
 <script>
 
     $("#captionTop").on("input", function () {
-
         $('#topDemo').text($("#captionTop").val());
 
     });
 
     $("#captionBot").on("input", function () {
-
         $('#bottomDemo').text($("#captionBot").val());
 
     });
 
-    $("#imgUrl").on("input", function () {
+    $('#memeImage').load(function () {
+        $('#meme').css('width', $('#memeImage').width());
+    });
 
-        $('#meme').css('background', 'no-repeat url(' + $("#imgUrl").val() + ')');
-
+    $("#imgUrl").on("input", function () { 
+        $('#memeImage').attr("src", $("#imgUrl").val());
 
     });
 
@@ -63,8 +64,7 @@
          background-size: 100%; 
          text-align: center;
          position: relative;
-         width: 150px;
-         height: 150px;
+
      }
 
     .memeCaption{

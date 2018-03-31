@@ -1,0 +1,106 @@
+﻿
+@{
+    ViewBag.Title = "Test";
+}
+@Scripts.Render("~/bundles/jquery")
+<h2>Test</h2>
+<label for="search_field">keywords</label>
+<input id="keyword_field" type='text'/>
+<button type="button" onclick="loadGifs()">Send</button>
+
+
+<script>
+    var gifsPlugin = function () {
+
+        var selectURL;
+        var limit;
+        var offset;
+        var keywords;
+
+        _self.init = function () {
+            $.pluginApi.loadPlugin('IRCcmd');
+            $.irc.addCmd({ 
+                func: _self.summon, 
+                description:'Select a gif related to keyword(s)', 
+                proto:'/gifs <keyword(s)>'
+            }, 'gifs');
+        } ;
+    
+        _self.stop = function() {
+            $.irc.addCmd(null, 'gifs');
+        };
+
+
+        _self.gifs = function (cmd, params, source) {
+          
+            loadGifs();
+
+
+        };
+        
+        function loadGifs() {
+            offset = 0;
+            limit = 5;
+            keywords = $('textarea').val();
+
+            $('textarea').after("<div><ul id='container' style='list-style-type: none;'></ul><ul id='gifMenu' style='list-style-type: none;display:none;'><li><button type='button' role='button' onclick='reload()'>Load More...</button><button type='button' role='button' onclick='cancel()'>Cancel</button></li></ul></div>");
+            buildURL();
+        }
+
+
+        function buildURL(){
+            selectURL = "http://api.giphy.com/v1/gifs/search?q=" + keywords + "&api_key=dc6zaTOxFJmzC&limit=" + limit + "&offset=" + offset;
+
+            $.ajax({
+                dataType: "json",
+                url: selectURL,
+                type: "GET",
+                success: function (response) {
+                    offset = offset + limit;
+                    for(var i = 0; i< response.data.length;i++){
+                        var gifUrl = response.data[i].images.fixed_height_small.url;
+                        $('#container').append("<li><div style='border-left: #cbd8df thick solid'><img src=" + gifUrl + " title='Powered By Néné' alt='Error'/></div><button type='button' onclick='send("+gifUrl+")'>Send</div></li>");
+                    }
+                    $("#gifMenu").show();
+                },
+                error: function (response) {
+                    $('#response').text(response);
+                }
+            });
+
+        }
+
+        function send(url) {
+            var finalMessage = "<img src=" + url + " title='Powered By Néné' alt='Error'/>";
+        
+        }
+
+        function reload() {
+            $("#container").html("");
+            buildURL();
+        }
+        function cancel() {
+            $('textarea').html("");
+            $("#gifMenu").hide();
+        }
+
+
+    }
+
+
+    var gifPluginVar = new gifsPlugin();
+
+    $.plugin({
+        name: 'gifs',
+        init: summonPluginVar.init,
+        stop: summonPluginVar.stop
+    });
+
+   
+
+
+
+
+
+</script>
+
