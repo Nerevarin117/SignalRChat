@@ -40,7 +40,7 @@ namespace SignalRChat.DAL
                     countries.AddRange(from DataRow dr in ds.Tables[0].Rows
                         select new CountryModel()
                         {
-                            IdCountry = (int) dr["CtyId"], RefCountry = dr["RefCountry"].ToString(), LibCountry = dr["libCountry"].ToString()
+                            IdCountry = (int) dr["CtyId"], RefCountry = dr["CtyRef"].ToString(), LibCountry = dr["CtyLabel"].ToString()
                         });
                 }
             }

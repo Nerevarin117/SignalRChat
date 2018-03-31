@@ -58,6 +58,7 @@
   <ItemGroup>
     <Folder Include="Properties" />
     <Folder Include="Tables" />
+    <Folder Include="Proc" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\AspNetRoles.sql" />
@@ -66,5 +67,12 @@
     <Build Include="Tables\AspNetUserRoles.sql" />
     <Build Include="Tables\AspNetUsers.sql" />
     <Build Include="Tables\Country.sql" />
+    <Build Include="Proc\CountryList.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="sRC-Database.publish.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Script.PostDeployment1.sql" />
   </ItemGroup>
 </Project>

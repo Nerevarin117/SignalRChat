@@ -1,0 +1,36 @@
+﻿.chat {
+    background-color: transparent;
+}
+
+.panel-chat {
+    background-color: #2a2d34;
+    border-color: black;
+}
+
+.panel-command .panel-heading {
+    background-color: #5c946e;
+}
+
+.panel-command {
+    background-color: darkslategrey;
+}
+
+.room-detail {
+    background-color: darkslategrey;
+}
+
+.chat-box {
+    background-color: #f0f3bd;
+}
+
+.chat-panel-title {
+    color:white;
+}
+
+.chat-panel-heading {
+    color: white;
+}
+
+
+
+

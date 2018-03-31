@@ -1,4 +1,7 @@
-﻿
+﻿@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")
 @model SignalRChat.Models.SimpleBotModel
 
 <div class="panel panel-primary" style="width:50%;height: 50%;max-height: 50%;max-width: 50%">
@@ -6,82 +9,250 @@
         <h3 class="panel-title">Create New Bot</h3>
     </div>
     <div class="panel-body">
+
         @using (Html.BeginForm("Index", "Robot", FormMethod.Post, new { id = "RobotEditor" }))
         {
-                <div style="border: thick solid black;">
-                    <div class="input-group">
-                        <div class="input-group-btn">
-                            <button type="button" class="btn btn-default">Operator</button>
-                            <button id="selectedOperator" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></button>
-                            <ul class="dropdown-menu">
-                                <li><a onclick="selectOperator(this)">&</a></li>
-                                <li><a onclick="selectOperator(this)">||</a></li>
-                            </ul>
-                        </div>
-                        <input id="newTrigger" type="text" class="form-control" placeholder="New Trigger Word...">
-                        <span class="input-group-btn">
-                            <button class="btn btn-default" type="button" onclick="appendNewTrigger()"><span class="glyphicon glyphicon-plus"></span>&nbsp;Add</button>
-                        </span>
+            <div class="input-group">
+                <span class="input-group-addon">
+                    Display Name :
+                </span>
+                <input type="text" class="form-control" aria-label="...">
+            </div><!-- /input-group -->
+            <div style="border: thick solid black;">
+                <div class="input-group">
+                    <div class="input-group-btn">
+                        <button type="button" class="btn btn-default">?</button>
                     </div>
-                    <div id="triggerList" class="panel panel-body">
+                    <input id="newTrigger" type="text" class="form-control" placeholder="New Trigger Word(s) or sentence...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" onclick="appendNewTrigger()"><span class="glyphicon glyphicon-plus"></span>&nbsp;Add</button>
+                    </span>
+                </div>
+                <div  class="panel panel-body">
+                    <table id="triggerList" style="width:100%">
                         @foreach (var item in Model.Triggers)
                         {
-                            <div class="trigger">
-                                <div class="label label-default" style='margin-right:10px'>@item.LogicOP</div>
-                                <div class="label label-success">@item.Word</div>
-                                <input id="triggerOP" name="triggerOP" value="@(item.LogicOP)" hidden="hidden" />
-                                <input id="triggerWord" name="triggerWord" value="@(item.Word)" hidden="hidden" />
-                            </div>
+                            <tr>
+                                <td class="trigger">
+                                    <div class="label label-default" style='margin-right:10px'>@item.LogicOP</div>
+                                    <div class="label label-success">@item.Word</div>
+                                    <input id="triggerOP" name="triggerOP" value="@(item.LogicOP)" hidden="hidden" />
+                                    <input id="triggerWord" name="triggerWord" value="@(item.Word)" hidden="hidden" />
+                                </td>
+                            </tr>
 
                         }
-                    </div>
+                    </table>
                 </div>
-                <div style="width: 50%;border-right: thick solid black;">&nbsp;</div>
-                <div class="text-center">
-                    <button id="modeToggler" class="btn label label-info" type="button" onclick="toggleMode()"><span class="glyphicon glyphicon-random"></span>&nbsp;Random Mode</button>
-                </div>
-                <div style="width: 50%;border-right: thick solid black;">&nbsp;</div>
-                <div style="border: thick solid black;">
-                    <div class="input-group">
-                        <input id="newResponse" type="text" class="form-control" placeholder="Enter new response...">
-                        <span class="input-group-btn">
-                            <button class="btn btn-default" type="button" onclick="appendNewResponse()"><span class="glyphicon glyphicon-plus"></span>&nbsp;Add</button>
-                        </span>
-                    </div>
-                    <div class="panel panel-body" style="max-height: 400px;overflow: auto">
-                        <table id="responseList" style="width:100%">
-                            <tr>
-                                @foreach (var item in Model.Response)
-                            {
-                                    <td>
-                                        <div class="text-info">@item</div>
-                                        <input name="responseItem" value="@(item)" hidden="hidden" />
-                                    </td>
-                            }
-                            </tr>
-                        </table>
-                    </div>
-
-                </div>
-
-                <button class="btn btn-default" type="submit" style="width: 100%">Submit</button>
-
-                }
             </div>
+            <div style="width: 50%;border-right: thick solid black;">&nbsp;</div>
+            <div class="text-center">
+                <button id="modeToggler" class="btn label label-info" type="button" onclick="toggleMode()"><span class="glyphicon glyphicon-random"></span>&nbsp;Random Mode</button>
+            </div>
+            <div style="width: 50%;border-right: thick solid black;">&nbsp;</div>
+            <div style="border: thick solid black;">
+                <div class="input-group">
+                    <input id="newResponse" type="text" class="form-control" placeholder="Enter new response...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" onclick="appendNewResponse()"><span class="glyphicon glyphicon-plus"></span>&nbsp;Add</button>
+                    </span>
+                </div>
+                <div class="panel panel-body" style="max-height: 400px;overflow: auto">
+                    <table id="responseList" style="width:100%">
+                        @foreach (var item in Model.Response)
+                        {
+                            <tr>
+                                <td class="response">
+
+                                    <div class="text-info">
+                                        <span class='label label-danger' aria-hidden='true'>&#10006</span>
+                                        <span class='label label-default'></span>@item
+                                    </div>
+                                    <input name="responseItem" value="@(item)" hidden="hidden" />
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+
+            </div>
+            
+            <div class="row">
+                <div class="panel panel-body">
+                    Icon Set :
+                    <div class="botIconList">
+                        <img class="img-responsive" style="width:64px;height: 64px;" src="http://megaicons.net/static/img/icons_sizes/51/832/64/pirate-icon.png" />
+                        <button type="button" class="btn btn-default" style="width:64px;height: 64px;" data-toggle="modal" data-target="#iconSetter"><span class="glyphicon glyphicon-plus glyphicon-big"></span></button>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-default" type="submit" style="width: 100%">Submit</button>
+
+        }
+    </div>
 </div>
 
+<div id="iconSetter" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Add icon to set</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                Url
+                            </span>
+                            <input id="inputURL" type="text" class="form-control">
+                        </div><!-- /input-group -->
+                    </div>
+                    <br/>
+                    <div class="col-lg-12">
+                       OR
+                    </div>
+                    <br />
+                    <div class="col-lg-12">
+                        <div class="input-group">
+                          <input id="inputLocal" type="file" class="form-control">
+                        </div><!-- /input-group -->
+                    </div>
+                </div><!-- /.row -->
+            </div>
+            <hr/>
+            <div class="text-center">
+                Preview
+                
+            </div>
+            <div align="center">
+                <img id="iconPreview" class="img-responsive" style="width:64px;height: 64px;display: block;" src="" alt="64x64" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default">Done</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<div id="uploadModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" style="top: 50%">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content text-center">
+            Uploading File ...
+            <div class="progress">
+                <div id="barFile" class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                    0%
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
+    
+    var _URL = window.URL || window.webkitURL;
+    $("#inputLocal").change(function (e) {
+        var file, img;
+        if ((file = this.files[0])) {
+            var extension = file.name.split('.').pop().toLowerCase();
+            img = new Image();
+            img.src = _URL.createObjectURL(file);
+            img.onload = function () {
+                if (this.width > 64 || this.height > 64) {
+                    alert("Image must be max. 64x64");
+                    $('#inputLocal').val("");
+                    return;
+
+                } else if (file.size > 100000 || file.size < 512 || (extension !== "jpg" && extension !== "png")) {
+                    alert("The file must not exceed 100Ko and be a jpg or png format.");
+                    $('#inputLocal').val("");
+                    return;
+                }
+            };
+            $('#iconPreview').attr('src', img.src);
+        }
+    });
+
+    function uploadIcon() {
+        $("#uploadModal").modal('show');
+        var formData = new FormData();
+        var file = $("#inputLocal")[0].files[0];
+        formData.append("file", file);
+        var ajax = new XMLHttpRequest();
+        ajax.upload.addEventListener("progress", progressHandler, false);
+        ajax.addEventListener("load", completeHandler, false);
+        ajax.open("POST", "/Robotot/UploadIcon");
+        ajax.send(formData);
+
+    }
+
+    function progressHandler(event) {
+        var percent = (event.loaded / event.total) * 100;
+        $('#barFile').width(percent + '%');
+        $('#barFile').text(percent + '%');
+    }
+
+    function completeHandler() {
+        $('#barFile').width(100);
+        $("#uploadModal").modal('hide');
+
+    }
+
+    $("#inputURL").on("input", function () {
+
+        $('#iconPreview').attr('src', $("#inputURL").val());
+
+
+    });
+
 
     function appendNewResponse() {
-        $("#responseList").append("<tr ><td> <div class='text-info'>" + $("#newResponse").val() + "</div><input value='" + $("#newResponse").val() + "' hidden='hidden' /></td></tr>");
+        var triggerCount = $("#responseList tr").length;
+        $("#responseList").append("<tr ><td class='response'><div class='text-info'><span class='label label-danger'  aria-hidden='true'>&#10006</span><span class='label label-default'>" + (triggerCount + 1) + "</span> " + $("#newResponse").val() + "</div><input value='" + $("#newResponse").val() + "' hidden='hidden' /></td></tr>");
+
+        $(".label-danger").on("click", function () {
+
+            $(this).parent().parent().parent().remove();
+
+            var iterator = 0;
+            $('#responseList tr').each(function () {
+
+                ++iterator;
+                $(this).find('span.label-default').text(iterator);
+            });
+        });
+
     }
 
     function appendNewTrigger() {
-        $("#triggerList").append("<div class='trigger'><div class='label label-default' style='margin-right:10px'>" + $("#selectedOperator").text() + "</div><div class='label label-success'>" + $("#newTrigger").val() + "</div><input value='" + $("#newTrigger").val() + "' hidden='hidden' /></div>");
+        var trigger = $("#newTrigger").val();
+
+        if (trigger.indexOf("&") == 0 || trigger.indexOf("||") == 0)
+            alert("Your trigger should not start with an operator!");
+
+        var cleaned = trigger.replace("&", " ");
+        cleaned = cleaned.replace("||", " ");
+        var triggerCount = $("#triggerList tr").length;
+        $("#triggerList").append("<tr ><td class='trigger'><span class='label label-danger'  aria-hidden='true'>&#10006</span><span class='label label-default'>" + (triggerCount + 1) + "</span><div class='label label-default' style='margin-right:10px'>" + $("#selectedOperator").text() + "</div><div class='label label-success'>" + cleaned + "</div><input value='" + $("#newTrigger").val() + "' hidden='hidden' /><label>&nbsp;Case Sensitive : <input type='checkbox'></label></td></tr >");
+
+
+        $(".label-danger").on("click", function () {
+
+            $(this).parent().parent().remove();
+
+            var iterator = 0;
+            $('#triggerList tr').each(function () {
+
+                ++iterator;
+                $(this).find('span.label-default').text(iterator);
+            });
+        });
+
+
     }
-    function selectOperator(e) {
-        $("#selectedOperator").text($(e).text());
-    }
+
     function toggleMode() {
         var text = $("#modeToggler").text();
         if (text.indexOf("Synchronized") !== -1) {
@@ -91,14 +262,27 @@
         }
         
     }
+
+
 </script>
 <style>
     .trigger {
-        display: inline-flex;
+        padding: 5px;
+    }
+    .response {
         padding: 5px;
     }
     .label {
-         font-size: 100%;
-         padding-right: 5px;
+        font-size: 100%;
+        padding-right: 5px;
     }
+    .botIconList {
+        border: solid thick black;
+        display: flex;
+    }
+
+    span.glyphicon-big {
+    font-size: 2em;
+    }
+
 </style>

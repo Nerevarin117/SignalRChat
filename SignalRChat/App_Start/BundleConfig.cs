@@ -25,7 +25,7 @@ namespace SignalRChat
                       "~/Content/site.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/chat").Include(
-                      "~/Scripts/Chat/Plugins/Commands.js"));
+                      "~/Scripts/Chat/Plugins/*.js"));
         }
     }
 }

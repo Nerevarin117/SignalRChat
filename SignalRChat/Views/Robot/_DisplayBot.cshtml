@@ -1,0 +1,80 @@
+﻿@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")
+
+<div class="col-lg-9 chat" style="height:calc(75vh);">
+    <div class="panel" style="background-color: white;height: 100%;overflow-y:auto">
+        <ul id="discussion" style="list-style-type: none;padding: 10px;background-color: white">
+            <li>
+                <i>Welcome In the Chat Room!</i>
+            </li>
+            <li>
+                <hr>
+            </li>
+            <li class="media">
+                <div class="media pull-left">
+                    <a href="#">
+                        <img alt="64x64" class="media-object" data-holder-rendered="true" style="width: 64px; height: 64px;">
+                    </a>
+                    <div>
+                        Name
+                    </div>
+                </div>
+                <div class="media-body">
+                    <p class="speech-bubble">
+                        Hello World!
+                    </p>
+                </div>
+            </li>
+
+        </ul>
+    </div>
+</div>
+
+
+<style>
+/* Used for bot http://html-codes-generator.weebly.com/css-speech-bubble-generator.html */  
+
+.speech-bubble {
+    margin-left: 30px;
+   position: relative;
+   width: 250px;
+   height: 50px;
+   line-height: 50px;
+   color: #FFFFFF;
+   text-align: center;
+   padding: 0px;
+   background: #cfcfcf;
+   border-radius: 10px;
+   border: #828282 solid 3px;
+   box-shadow: 5px 5px 2px 0px rgba(163, 163, 163, 0.5);
+}
+
+.speech-bubble:after {
+   content: '';
+   position: absolute;
+   border-style: solid;
+   border-width: 12px 20px 12px 0;
+   border-color: transparent #cfcfcf;
+   display: block;
+   width: 0;
+   z-index: 1;
+   left: -20px;
+   top: 10px;
+}
+
+.speech-bubble:before {
+   content: '';
+   position: absolute;
+   border-style: solid;
+   border-width: 14px 22px 14px 0;
+   border-color: transparent #828282;
+   display: block;
+   width: 0;
+   z-index: 0;
+   left: -25px;
+   top: 8px;
+}
+</style>
+

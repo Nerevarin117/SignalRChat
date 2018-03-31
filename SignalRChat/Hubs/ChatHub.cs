@@ -19,10 +19,14 @@ namespace SignalRChat
             {
                 message = StickerParser.ParseStickers(message);
 
-                Clients.All.addNewMessageToPage(name, message);
-            }               
+                //Clients.All.addNewMessageToPage(name, message);
+                //Clients.All.addHtmlToPage("<i>test<i>");
+                Clients.All.useReactToRenderMessage(new { message = message });
+                //go renvoyer du json et utiliser React
 
-           
+            }
+
+
         }
     }
 }

@@ -55,3 +55,8 @@ sRC-Database/sRC-Database.dbmdl
 *.cache
 SignalRChat/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
 *.cache
+/sRC-Database/sRC-Database.jfm
+/sRC-Database/bin/Debug/sRC-Database.dacpac
+/sRC-Database/bin/Debug
+/sRC-Database/obj/Debug
+/packages
